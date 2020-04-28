@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -82,7 +83,6 @@ public class MReplyController extends HttpServlet {
 			boolean isS = dao.updateComment(new ReplyDto(mtitle,mid,content,mdirector));
 			if(isS) {
 				System.out.println("코멘트 업데이트 성공");
-				
 			}else {
 				System.out.println("코멘트 업데이트 실패");
 			}
@@ -117,6 +117,8 @@ public class MReplyController extends HttpServlet {
 				PrintWriter pw=response.getWriter();
 				pw.print(false);
 			}else {//평점이 이미 있다면 평점을 출력
+				
+//				평점이 이미 있다면 코멘트 유무도 확인?
 				System.out.println("평점이미있음 -> 출력합니다!");
 				int rate =dao.selectRate(new ReplyDto(title,id,director));
 				PrintWriter pw=response.getWriter();
@@ -126,5 +128,9 @@ public class MReplyController extends HttpServlet {
 			
 		}
 	}
-
+	
+	public void dispatch(String url, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dispatch=request.getRequestDispatcher(url);
+		dispatch.forward(request, response);
+	}
 }

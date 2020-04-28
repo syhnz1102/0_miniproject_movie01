@@ -11,9 +11,11 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function gg() {
-		var comdata=$("#com").serialize();
-		alert(comdata)
-		$.ajax({
+// 		$("#com").submit();
+		
+ 		var comdata=$("#com").serialize();//form안의 값을 시리얼라이즈
+// 		var $("com").
+ 		$.ajax({
 			url:"MReplyController.do",
 			method:"post",
 			datatype:"text",
@@ -21,13 +23,25 @@
 			data:comdata,
 			success:function(data) {
 				alert("등록성공");
+				$("#replyForm").css("display","none");
+				$("#commbutton").css("display","none");
+				$("#mycomment").css("display","block");
 				
+				//컨트롤러에서 id, comm도 가져오기? ㄴㄴ 방금쓴걸 넣어주기
+				
+				$("#myid").text($("#idVal").text());
+				$("#mycomm").text($("textarea").val());
+				//commbutton코멘트버튼 숨기고
+				//replyForm숨기고
+				//mycomment보이고
+				
+				//그리고 깜박한게 몇번째까지 보여줄지를 정하는거 그거 없애고 table반복생성구간 바꿔서 아예 테이블 자체에 적용
 				
 			},error:function(request,error){
 				alert("서버통신실패!!"+request.status+","+error);
 			}
 			
-		});
+		}); 
 		
 // 		document.getElementById("com").submit();
 // 		alert("코멘트가 등록되었습니다.");
@@ -63,7 +77,16 @@
 // 		alert(mimg);
 		
 		//★★★기존에 평점을 매겼으면 별점과 코멘트버튼 표시
-		//(##################추가할것:코멘트도 이미 있으면 표시안함(얘는 rate받아올때 comment도 같이 받아오면 되고)+코멘트 추가 후 바로 밑에 추가되고 코멘트쓰기 사라짐(후자는 디스패치로하면 쉽다.))
+		//(##################추가할것:코멘트도 이미 있으면 표시안함(얘는 rate받아올때 comment도 같이 받아오면 되고)
+		
+		//코멘트 추가시 동시에
+		//바로 밑에 코멘트 추가되고
+		//-코멘트쓰기 버튼 사라짐
+		//-코멘트폼까지 사라짐
+		//(후자는 디스패치로하면 쉽다.)
+		
+		//시도 1 : 수정버튼이 있으면 코멘트버튼은 안보이게하기 완료
+		//코멘트 추가 후 바로 밑에 추가되기
 		$.ajax({
 			url:"MReplyController.do",
 			method:"post",
@@ -81,10 +104,18 @@
 							$("#starResult").text("내가 준 평가 : "+rateValue.prop("value")+"점");
 //		 					alert("rateValue:"+rateValue);
 						}
+						$("#commbutton").css("display","none");
 					}
+				
+					//이건그냥 온로드
 					$("#starResult").text("내가 준 평점 : "+rate+"점");
 					$("#commbutton").text("");
-				 	$("#commbutton").append("<button id='comm' onclick='comm()'>코멘트쓰기</button>");
+// 					alert($("#commUpdate").text());
+					
+					if($("#commUpdate").text()!="수정"){
+					 	$("#commbutton").append("<button id='comm' onclick='comm()'>코멘트쓰기</button>");
+					}
+
 //						$("#commbutton").show();
 //						$("#comm").attr("display","block");
 //						$("#replyForm").text("");//rate안에 값이 있으면 코멘트폼을 보여준다
@@ -149,6 +180,7 @@
 </script>
 <style type="text/css">
  	#replyForm{display:none}
+ 	#mycomment{display:none}
 </style>
 </head>
 <body>
@@ -219,33 +251,69 @@
 		</form>
 	</div>
 </div>
-<c:forEach var="i" begin="0" end="${list.size()-1}" step="1">
-	<table class="table table-striped">
-		<col width="105px">
-		<col width="450px">
-		<col width="50px">
-		<col width="50px">
-		<tr>
-			<td>
-				<b>${list[i].m_id}</b>	
-			</td>
-			<td>
-				<span>${list[i].m_comment}</span>
-			</td>
-			
-			<c:choose>
-			<c:when test="${list[i].m_id eq sessionScope.ldto.m_id}">
-				<td>
-				<button>수정</button>
-				</td>
-				<td>
-				<button>삭제</button>
-				</td>
-			</c:when>
-			</c:choose>
-		</tr>
-	</table>
-</c:forEach>
 
+<%-- <c:forEach var="i" begin="0" end="${list.size()-1}" step="1"> --%>
+<div id="mycomment">
+<%-- 	<c:forEach var="i" begin="0" end="${list.size()}" step="1"> --%>
+<%-- 		<c:choose> --%>
+<%-- 			<c:when test="${list[i].m_id eq sessionScope.ldto.m_id}"> --%>
+				<table class="table table-striped">
+					<col width="105px">
+					<col width="450px">
+					<col width="50px">
+					<col width="50px">
+					<tr>
+						<td>
+							<b id="myid"></b>	
+						</td>
+						<td>
+							<span id="mycomm"></span>
+						</td>
+						<td>
+							<button id="commUpdate">수정</button>
+						</td>
+						<td>
+							<button>삭제</button>
+						</td>
+					</tr>
+				</table>
+<%-- 			</c:when> --%>
+<%-- 		</c:choose> --%>
+<%-- 	</c:forEach> --%>
+</div>
+
+<div id="comments">
+	<c:forEach var="i" begin="0" end="${list.size()}" step="1">
+		<c:choose>
+			<c:when test="${not empty list[i].m_comment}">
+				<table class="table table-striped">
+					<col width="105px">
+					<col width="450px">
+					<col width="50px">
+					<col width="50px">
+					<tr>
+						<td>
+							<b>${list[i].m_id}</b>	
+						</td>
+						<td>
+							<span>${list[i].m_comment}</span>
+						</td>
+					
+						<c:choose>
+							<c:when test="${list[i].m_id eq sessionScope.ldto.m_id}">
+								<td>
+								<button id="commUpdate">수정</button>
+								</td>
+								<td>
+								<button>삭제</button>
+								</td>
+							</c:when>
+						</c:choose>
+					</tr>
+				</table>
+			</c:when>
+		</c:choose>
+	</c:forEach>
+</div>
 </body>
 </html>
