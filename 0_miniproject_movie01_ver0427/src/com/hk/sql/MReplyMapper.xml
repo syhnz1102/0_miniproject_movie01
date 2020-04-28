@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.hk.mreply">
+	<update id="insertRate" parameterType="ReplyDto">
+		INSERT INTO M_REPLY 
+		VALUES(m_reply_seq.nextval,#{m_title},#{m_id},#{m_rate},NULL,#{m_director}
+		,#{m_naverrate},#{m_pubdate},#{m_msubtitle},#{m_actornm},#{m_link},#{m_img})
+	</update>
+	
+	<select id="chkRate" parameterType="ReplyDto" resultType="String">
+		SELECT M_TITLE
+		FROM M_REPLY
+		WHERE M_TITLE =#{m_title}
+		AND M_DIRECTOR =#{m_director}
+		AND M_ID =#{m_id}
+	</select>
+
+	<update id="updateRate" parameterType="ReplyDto">
+		UPDATE M_REPLY 
+		SET M_RATE =#{m_rate}
+		WHERE M_TITLE =#{m_title}
+		AND M_DIRECTOR =#{m_director}
+		AND M_ID =#{m_id}
+	</update>
+	
+	<select id="selectRate" parameterType="ReplyDto" resultType="int">
+		SELECT M_RATE
+		FROM M_REPLY
+		WHERE M_TITLE =#{m_title}
+		AND M_DIRECTOR =#{m_director}
+		AND M_ID =#{m_id}
+	</select>
+	
+	<update id="updateComment" parameterType="ReplyDto">
+		UPDATE M_REPLY
+		SET M_COMMENT=#{m_comment}
+		WHERE M_TITLE =#{m_title}
+		AND M_DIRECTOR =#{m_director}
+		AND M_ID =#{m_id}
+	</update>
+	
+	<select id="chkComm" parameterType="ReplyDto" resultType="ReplyDto">
+		SELECT M_ID ,M_COMMENT 
+		FROM M_REPLY
+		WHERE M_TITLE =#{m_title}
+		AND M_DIRECTOR =#{m_director}
+		ORDER BY M_SEQ
+	</select>
+</mapper>

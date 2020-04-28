@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="0_miniproject_movie01_ver0427">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="jstl-1.2.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/jstl-1.2/jstl-1.2">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="json-lib-2.3-jdk15.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/json-lib-2.3-jdk15/json-lib-2.3-jdk15">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-collections-3.2.1.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/commons-collections-3.2.1/commons-collections-3.2.1">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="mybatis-3.4.1.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/mybatis-3.4.1/mybatis-3.4.1">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="ezmorph-1.0.6.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/ezmorph-1.0.6/ezmorph-1.0.6">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jackson-all-1.9.11.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/jackson-all-1.9.11/jackson-all-1.9.11">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-lang-2.5.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/commons-lang-2.5/commons-lang-2.5">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="kobis-opcl-rest-v1.0.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/kobis-opcl-rest-v1.0/kobis-opcl-rest-v1.0">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-logging-1.1.1.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/commons-logging-1.1.1/commons-logging-1.1.1">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="commons-beanutils-1.8.2.jar" deploy-path="/WEB-INF/lib/" handle="module:/resource/commons-beanutils-1.8.2/commons-beanutils-1.8.2">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="context-root" value="0_miniproject_movie01_ver0427"/>
+        <property name="java-output-path" value="/0_miniproject_movie01_ver0427/build/classes"/>
+    </wb-module>
+</project-modules>

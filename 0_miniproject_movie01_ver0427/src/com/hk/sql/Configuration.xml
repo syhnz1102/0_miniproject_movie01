@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- DB 접속정보 파일 설정 -->
+	<properties resource="com/hk/sql/db.properties"/>
+	<!-- Dto객체의 변수 설정 -->
+	<typeAliases>
+	<!-- 새로운 테이블 생성시 해당 dto에 맞게 한줄 더 생성해주기 -->
+		<typeAlias type="com.hk.dtos.LoginDto" alias="LoginDto"/>
+		<typeAlias type="com.hk.dtos.ReplyDto" alias="ReplyDto"/>
+	</typeAliases>
+	
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${driver}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+  	<!-- 새로운 테이블 생성시 컨트롤러나 매퍼.xml이나 기존꺼 한개로 해도 상관없고 분류해놓기위해 새로 생성해도된다. -->
+  	<!-- 허나 매퍼.xml파일을 생성했다면 밑에도 resource추가를 해주자. -->
+    <mapper resource="com/hk/sql/MUserMapper.xml"/>
+    <mapper resource="com/hk/sql/MReplyMapper.xml"/>
+  </mappers>
+</configuration>

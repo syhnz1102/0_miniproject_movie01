@@ -1,0 +1,53 @@
+////M_USER
+
+CREATE table "M_USER" (
+    "M_ID"       VARCHAR2(20) NOT NULL,
+    "M_PASSWORD" VARCHAR2(20) NOT NULL,
+    "M_NAME"     VARCHAR2(40) NOT NULL,
+    "M_ADDRESS"  VARCHAR2(2000) NOT NULL,
+    "M_PHONE"    VARCHAR2(40) NOT NULL,
+    "M_EMAIL"    VARCHAR2(100) NOT NULL,
+    "M_ENABLED"  VARCHAR2(2) NOT NULL,
+    "M_ROLE"     VARCHAR2(40) NOT NULL,
+    constraint  "M_USER_PK" primary key ("M_ID")
+)
+/
+
+
+
+
+////M_REPLY
+
+CREATE table "M_REPLY" (
+    "M_SEQ"      NUMBER NOT NULL,
+    "M_TITLE"    VARCHAR2(300) NOT NULL,
+    "M_ID"       VARCHAR2(20) NOT NULL,
+    "M_RATE"     NUMBER NOT NULL,
+    "M_COMMENT"  VARCHAR2(3000),
+    constraint  "M_REPLY_PK" primary key ("M_SEQ")
+)
+/
+
+CREATE sequence "M_REPLY_SEQ" 
+/
+
+CREATE trigger "BI_M_REPLY"  
+  before insert on "M_REPLY"              
+  for each row 
+begin  
+  if :NEW."M_SEQ" is null then
+    select "M_REPLY_SEQ".nextval into :NEW."M_SEQ" from dual;
+  end if;
+end;
+/   
+
+ALTER TABLE "M_REPLY" ADD CONSTRAINT "M_REPLY_FK" 
+FOREIGN KEY ("M_ID")
+REFERENCES "M_USER" ("M_ID")
+ON DELETE CASCADE
+
+/
+alter table "M_REPLY" add
+constraint "M_REPLY_UK1" 
+unique ("M_TITLE")
+/   

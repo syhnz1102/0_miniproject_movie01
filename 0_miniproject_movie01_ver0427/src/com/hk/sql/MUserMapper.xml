@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.hk.muser">
+
+  <insert id="insertUser" parameterType="LoginDto">
+  	INSERT INTO M_USER
+	VALUES(#{m_id},#{m_password},#{m_name},#{m_address},#{m_phone},#{m_email},'Y','USER')
+  </insert>
+  
+  <select id="idChk" parameterType="String" resultType="String">
+  	SELECT M_ID 
+	FROM M_USER
+	WHERE M_ID =#{id}
+  </select>
+  
+  <select id="login" parameterType="Map" resultType="LoginDto">
+	SELECT M_ID ,M_NAME ,M_ENABLED ,M_ROLE
+	FROM M_USER
+	WHERE M_ID =#{id}
+	AND M_PASSWORD =#{password}
+	AND M_ENABLED ='Y'
+  </select>
+  
+  <select id="userInfo" parameterType="String" resultType="LoginDto">
+  	SELECT M_ID ,M_PASSWORD ,M_NAME ,M_ADDRESS ,M_PHONE ,M_EMAIL ,M_ENABLED ,M_ROLE 
+	FROM m_user
+	WHERE M_ID =#{id}
+  </select>
+  
+  <update id="userUpdate" parameterType="LoginDto">
+  	UPDATE M_USER 
+	SET M_ADDRESS =#{m_address},
+		M_PHONE =#{m_phone},
+		M_EMAIL =#{m_email}
+	WHERE M_ID =#{m_id}
+  </update>
+  
+  <update id="userDelete" parameterType="String">
+  	UPDATE M_USER 
+	SET M_ENABLED ='N'
+	WHERE M_ID =#{m_id}
+  </update>
+  
+  <select id="allUserList" resultType="LoginDto">
+  	SELECT M_ID ,M_PASSWORD ,M_NAME ,M_ADDRESS ,M_PHONE ,M_EMAIL ,M_ENABLED ,M_ROLE 
+	FROM m_user
+  </select>
+  
+  <update id="roleUpdate" parameterType="map">
+  	UPDATE M_USER 
+	SET M_ROLE =#{m_role}
+	WHERE M_ID =#{m_id}
+  </update>
+  
+  
+</mapper>
