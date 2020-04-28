@@ -43,7 +43,7 @@
 	</update>
 	
 	<select id="chkComm" parameterType="ReplyDto" resultType="ReplyDto">
-		SELECT M_ID ,M_COMMENT 
+		SELECT M_ID ,M_COMMENT ,M_RATE 
 		FROM M_REPLY
 		WHERE M_TITLE =#{m_title}
 		AND M_DIRECTOR =#{m_director}

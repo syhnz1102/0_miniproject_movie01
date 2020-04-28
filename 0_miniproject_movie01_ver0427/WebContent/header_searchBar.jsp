@@ -7,6 +7,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.mdirector{display:none};
+
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	function movieListR() {
@@ -43,7 +47,7 @@
 		//						영화제목 클릭시 해당영화의 정보를 ajax로 내보냄
 		//						일단은 새로운 db에 출력하는게 아닌 그냥 아무 jsp form에 값을 전달. 
 						var title		 = $("<div><a class='mtitle'>"+data.items[i].title+"</a></div>");
-						var director	 = $("<div class='mdirector'>감독 : <span>"+data.items[i].director.replace('|','').replace('|','')+"</span></div>");
+						var director	 = $("<div class='mdirector' >감독 : <span>"+data.items[i].director.replace('|','').replace('|','')+"</span></div>");
 						var pubDate		 = $("<div class='mpubdate'>제작연도 : <span>"+data.items[i].pubDate+"</span></div>");
 						
 						var resultInfo	 = $("<div class='result'></div>");

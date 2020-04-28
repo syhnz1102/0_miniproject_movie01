@@ -104,7 +104,11 @@
 							$("#starResult").text("내가 준 평가 : "+rateValue.prop("value")+"점");
 //		 					alert("rateValue:"+rateValue);
 						}
-						$("#commbutton").css("display","none");
+ 						//평점은 등록되어있고 수정버튼도 있으면 숨긴다
+						if($("#commUpdate").text()=="수정"){
+							$("#commbutton").css("display","none");
+						}
+						//평점이 등록되어있고 코멘트는 없으면 수정버튼을 숨기지않는다
 					}
 				
 					//이건그냥 온로드
@@ -221,7 +225,7 @@
 
 	
 	<br>
-	<div>네이버평점 : <span id="mnaverrate">${arr[4]}</span></div>
+<%-- 	<div>네이버평점 : <span id="mnaverrate">${arr[4]}</span></div> --%>
 	<div>감독 : <span id="mdirector">${arr[2]}</span></div>
 	<div>출연진 : <span id="mactor">${arr[6]}</span></div>
 	<div><a id="mlink" href="${arr[7]}">네이버링크 바로가기</a></div>
@@ -258,7 +262,7 @@
 <%-- 		<c:choose> --%>
 <%-- 			<c:when test="${list[i].m_id eq sessionScope.ldto.m_id}"> --%>
 				<table class="table table-striped">
-					<col width="105px">
+					<col width="100px">
 					<col width="450px">
 					<col width="50px">
 					<col width="50px">
@@ -269,12 +273,16 @@
 						<td>
 							<span id="mycomm"></span>
 						</td>
-						<td>
-							<button id="commUpdate">수정</button>
-						</td>
-						<td>
-							<button>삭제</button>
-						</td>
+						<c:choose>
+							<c:when test="${list[i].m_id eq sessionScope.ldto.m_id}">
+								<td>
+									<button id="commUpdate">수정</button>
+								</td>
+								<td>
+									<button>삭제</button>
+								</td>
+							</c:when>
+						</c:choose>
 					</tr>
 				</table>
 <%-- 			</c:when> --%>
@@ -282,20 +290,26 @@
 <%-- 	</c:forEach> --%>
 </div>
 
-<div id="comments">
+<div id="comments">	
 	<c:forEach var="i" begin="0" end="${list.size()}" step="1">
 		<c:choose>
 			<c:when test="${not empty list[i].m_comment}">
-				<table class="table table-striped">
-					<col width="105px">
-					<col width="450px">
+				<table border="1" class="table table-striped">
+					<col width="100px">
+					<col width="600px">
 					<col width="50px">
 					<col width="50px">
+					<col width="150px">
 					<tr>
 						<td>
 							<b>${list[i].m_id}</b>	
 						</td>
+
 						<td>
+							<span>
+								<c:forEach begin="1" end="${list[i].m_rate}" step="1">★</c:forEach><c:forEach begin="1" end="${5-list[i].m_rate}" step="1">☆</c:forEach>
+							&emsp;&emsp;
+							</span>
 							<span>${list[i].m_comment}</span>
 						</td>
 					
@@ -308,6 +322,10 @@
 								<button>삭제</button>
 								</td>
 							</c:when>
+							<c:otherwise>
+							<td></td>
+							<td></td>
+							</c:otherwise>
 						</c:choose>
 					</tr>
 				</table>
