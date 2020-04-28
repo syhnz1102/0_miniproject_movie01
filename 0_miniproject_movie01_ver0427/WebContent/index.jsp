@@ -226,6 +226,7 @@
 
 
 <h1>홈페이지</h1>
+<h1>깃허브용 수정중</h1>
 
 <!-- <a href="NaverMController.do">네이버api테스트</a> -->
 <a href="MUserController.do?command=loginform">로그인</a>
