@@ -31,6 +31,9 @@
 				
 				$("#myid").text($("#idVal").text());
 				$("#mycomm").text($("textarea").val());
+				for (var i = 1; i < 6; i++) {
+// 					var mr = $(".input").find($("input[type=radio]")[i-1]);
+				}
 				//commbutton코멘트버튼 숨기고
 				//replyForm숨기고
 				//mycomment보이고
@@ -271,6 +274,10 @@
 							<b id="myid"></b>	
 						</td>
 						<td>
+<!-- 							<span id="myrate"> -->
+<%-- 								<c:forEach begin="1" end="1" step="1">★</c:forEach><c:forEach begin="1" end="1" step="1">☆</c:forEach> --%>
+<!-- 							&emsp;&emsp; -->
+<!-- 							</span> -->
 							<span id="mycomm"></span>
 						</td>
 						<c:choose>
@@ -294,7 +301,7 @@
 	<c:forEach var="i" begin="0" end="${list.size()}" step="1">
 		<c:choose>
 			<c:when test="${not empty list[i].m_comment}">
-				<table border="1" class="table table-striped">
+				<table class="table table-striped">
 					<col width="100px">
 					<col width="600px">
 					<col width="50px">
