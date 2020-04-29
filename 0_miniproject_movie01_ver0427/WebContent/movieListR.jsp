@@ -12,6 +12,7 @@
 <script type="text/javascript">
 	
 	$(function(){
+		alert("gd");
 		var movieNm = $("h1 > b").text();
 		$("input[name=movieNm]").val(movieNm);
 		

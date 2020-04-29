@@ -93,19 +93,27 @@
 </script>
 </head>
 <body>
-
+<c:choose>
+	<c:when test="${sessionScope.ldto.m_id==null}">	
+		<h1>홈페이지</h1>
+		<a href="MUserController.do?command=loginform">로그인</a>
+		<a href="MUserController.do?command=regist">회원가입</a>
+		<br>
+	</c:when>
+	<c:otherwise>
+		<h1>회원메인</h1>
+		<div>
+			<a href='' id='idVal'>${sessionScope.ldto.m_id}</a>
+			(${sessionScope.ldto.m_role eq 'USER'?'일반회원':'관리자?-오류 '})
+			<a href="MUserController.do?command=userinfo&id=${sessionScope.ldto.m_id}">나의 정보</a>
+			<a href="MUserController.do?command=logout">로그아웃</a>
+		</div>
+	</c:otherwise>
+</c:choose>
 <!-- 검색어기능 -->
-<h1>회원메인</h1>
-<div>
-	<a href='' id='idVal'>${sessionScope.ldto.m_id}</a>
-	(${sessionScope.ldto.m_role eq 'USER'?'일반회원':'관리자?-오류 '})
-	<a href="MUserController.do?command=userinfo&id=${sessionScope.ldto.m_id}">나의 정보</a>
-	<a href="MUserController.do?command=logout">로그아웃</a>
-</div>
 <form name="search" method="post">
 	<input type="hidden" name="command" value="searchMovie">
 	<input type="text" name="movieNm"/>
-	<input type="button" value="네이버검색" id="keySearch"/>
 	<button type="button" onclick='movieListR()'>테스트</button>
 </form>
 
