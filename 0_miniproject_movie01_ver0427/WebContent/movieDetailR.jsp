@@ -295,7 +295,7 @@
 <%-- 			</c:when> --%>
 <%-- 		</c:choose> --%>
 <%-- 	</c:forEach> --%>
-</div>
+</div> 
 
 <div id="comments">	
 	<c:forEach var="i" begin="0" end="${list.size()}" step="1">
