@@ -53,6 +53,12 @@
 	}
 
 	$(function () {//page가오픈되면실행
+		if($("#login").text()=="로그인"){
+			$(".star-input").css("display","none");
+			$("#starResult").css("display","none");
+		}
+		
+		//정보가 뿌려진 상세페이지 내에서 정보들을 다시 추출해오기
 		var mid= $("#idVal").text();
 		var mtitle= $("#mtitle").text();
 		var mdirector= $("#mdirector").text();
@@ -196,7 +202,6 @@
 <%-- ${arr[7]} : 링크--%>
 <%-- ${arr[8]} : 이미지--%>
 <div>
-	${mkeyword}
 	<a href="NaverMController.do?command=movieListR&movieNm=${mkeyword}">목록으로</a>
 	<a href="user_main.jsp">메인</a>
 	<div><img id="mimg" src="${arr[8]}"></div>

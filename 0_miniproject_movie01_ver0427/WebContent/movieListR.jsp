@@ -12,7 +12,6 @@
 <script type="text/javascript">
 	
 	$(function(){
-		alert("gd");
 		var movieNm = $("h1 > b").text();
 		$("input[name=movieNm]").val(movieNm);
 		
@@ -54,7 +53,14 @@
 </style>
 </head>
 <body>
-<h1>"<b>${movieNm}</b>" 검색결과</b></h1>
+<c:choose>
+	<c:when test="${movieNm==''}">
+		<h2><b>검색어를 입력하세요-!</b></h2>
+	</c:when>
+	<c:otherwise>
+		<h1>"<b>${movieNm}</b>" 검색결과</b></h1>
+	</c:otherwise>
+</c:choose>
 <div id ="resultBox">
 </div>
 <div>

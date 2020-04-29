@@ -47,25 +47,17 @@ response.setDateHeader("Expires", 0L); // Do not cache in proxy server
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-	$(function(){
-// 		로그인버튼이 없으면 평점란 안보이게
 
-// 		$("#login").attr("display","none");
-// 		if($())
-// 		$("")
-	});
-</script>
 </head>
 <body>
 
-<%-- <c:choose> --%>
-<%-- 	<c:when test="${empty ldto}"> --%>
-<!-- 		<script type="text/javascript"> -->
-<!-- // 			location.href="index.jsp" -->
-<!-- 		</script> -->
-<%-- 	</c:when> --%>
-<%-- </c:choose> --%>
+<c:choose>
+	<c:when test="${empty ldto}">
+		<script type="text/javascript">
+ 			location.href="index.jsp";
+		</script> 
+	</c:when>
+</c:choose>
 
 </body>
 </html>

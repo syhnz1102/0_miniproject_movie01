@@ -20,8 +20,10 @@
 	////////검색어 기능 json
 	$(function(){
 	//		var mN="";//뒤로가기버튼에 쓰일 input값 저장
+	if($("h1 > b").text()!=""){
 		var movieNm = $("h1 > b").text();//b에 있는 영화제목 가져와서
 		$("input[name=movieNm]").text(movieNm);//검색창.text안에 넣기 = val이랑 다름 val로하면 안됨
+	}
 	//검색어 안친 상태의 유저메인 에서  ajax실행하지 않기
 		if($("input[name=movieNm]").text()!=""){
 	
@@ -96,7 +98,7 @@
 <c:choose>
 	<c:when test="${sessionScope.ldto.m_id==null}">	
 		<h1>홈페이지</h1>
-		<a href="MUserController.do?command=loginform">로그인</a>
+		<a href="MUserController.do?command=loginform" id="login">로그인</a>
 		<a href="MUserController.do?command=regist">회원가입</a>
 		<br>
 	</c:when>
@@ -114,14 +116,8 @@
 <form name="search" method="post">
 	<input type="hidden" name="command" value="searchMovie">
 	<input type="text" name="movieNm"/>
-	<button type="button" onclick='movieListR()'>테스트</button>
+	<button type="button" onclick='movieListR()'>영화검색</button>
 </form>
 
-<%
-// 	LoginDto ldto=(LoginDto)session.getAttribute("ldto");
-// 	if(ldto==null){   
-// 		pageContext.forward("index.jsp");
-// 	}
-%>
 </body>
 </html>

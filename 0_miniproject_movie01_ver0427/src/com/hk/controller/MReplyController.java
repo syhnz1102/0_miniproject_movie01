@@ -124,7 +124,7 @@ public class MReplyController extends HttpServlet {
 				PrintWriter pw=response.getWriter();
 				pw.print(rate);
 			}
-		}else if(command.equals("chkComment")) {
+		}else if(command.equals("myPage")) {
 			
 		}
 	}
