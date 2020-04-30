@@ -22,7 +22,7 @@
 			async:false,
 			data:comdata,
 			success:function(data) {
-				alert("등록성공");
+// 				alert("댓글등록성공");
 				$("#replyForm").css("display","none");
 				$("#commbutton").css("display","none");
 				$("#mycomment").css("display","block");

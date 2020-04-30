@@ -51,3 +51,24 @@ alter table "M_REPLY" add
 constraint "M_REPLY_UK1" 
 unique ("M_TITLE")
 /   
+
+
+
+
+/////추가
+
+//디렉터 추가
+ALTER TABLE M_REPLY ADD(m_director VARCHAR2(200) NOT NULL); 
+
+// m_title에서 유니크 특성 제거
+ALTER TABLE M_REPLY DROP CONSTRAINT M_REPLY_UK1;
+
+// 도중에 하는 방식 바꿨기에 컬럼 추가
+ALTER TABLE M_REPLY ADD(
+m_pubdate VARCHAR2(50),
+m_naverRate VARCHAR2(50),
+m_msubtitle VARCHAR2(300),
+m_actorNm VARCHAR2(1000),
+m_link VARCHAR2(1000),
+m_img VARCHAR2(1000)
+); 

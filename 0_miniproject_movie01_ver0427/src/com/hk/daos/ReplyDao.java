@@ -108,4 +108,28 @@ public class ReplyDao extends SqlMapConfig{
 		
 		return list;
 	}
+	
+	public List<ReplyDto> getMyMovie(String id) {
+		SqlSession sqlSession=null;
+		List<ReplyDto> list= new ArrayList<>();
+		
+		try {
+			sqlSession=getSqlSessionFactory().openSession(true);
+			list=sqlSession.selectList(namespace+"getMyMovie",id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			sqlSession.close();
+		}
+		
+		return list;
+	}
 }
+
+
+
+
+
+
+
+

@@ -125,7 +125,12 @@ public class MReplyController extends HttpServlet {
 				pw.print(rate);
 			}
 		}else if(command.equals("myPage")) {
-			
+			String id = request.getParameter("id");
+			List<ReplyDto> list= dao.getMyMovie(id);
+			request.setAttribute("list", list);
+			System.out.println(list);
+			System.out.println("mypage갑시동");
+			dispatch("user_mypage.jsp", request, response); 
 		}
 	}
 	

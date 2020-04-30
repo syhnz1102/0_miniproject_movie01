@@ -9,7 +9,9 @@
 <title>Insert title here</title>
 <style type="text/css">
 .mdirector{display:none};
-
+/* .mtitle:hover{background-color: red}; */
+/* .mtitle{background-color: red}; */
+/* .mtitle{color: blue}; */
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -48,7 +50,7 @@
 						var image	 = $("<image class='mimg' src='"+data.items[i].image+"'/></div>");
 		//						영화제목 클릭시 해당영화의 정보를 ajax로 내보냄
 		//						일단은 새로운 db에 출력하는게 아닌 그냥 아무 jsp form에 값을 전달. 
-						var title		 = $("<div><a class='mtitle'>"+data.items[i].title+"</a></div>");
+						var title		 = $("<div><span class='mtitle'>"+data.items[i].title+"</span></div>");
 						var director	 = $("<div class='mdirector' >감독 : <span>"+data.items[i].director.replace('|','').replace('|','')+"</span></div>");
 						var pubDate		 = $("<div class='mpubdate'>제작연도 : <span>"+data.items[i].pubDate+"</span></div>");
 						
@@ -105,7 +107,7 @@
 	<c:otherwise>
 		<h1>회원메인</h1>
 		<div>
-			<a href='' id='idVal'>${sessionScope.ldto.m_id}</a>
+			<a href="MReplyController.do?command=myPage&id=${sessionScope.ldto.m_id}" id="idVal">${sessionScope.ldto.m_id}</a>
 			(${sessionScope.ldto.m_role eq 'USER'?'일반회원':'관리자?-오류 '})
 			<a href="MUserController.do?command=userinfo&id=${sessionScope.ldto.m_id}">나의 정보</a>
 			<a href="MUserController.do?command=logout">로그아웃</a>

@@ -49,4 +49,14 @@
 		AND M_DIRECTOR =#{m_director}
 		ORDER BY M_SEQ
 	</select>
+	
+	<select id="getMyMovie" parameterType="ReplyDto" resultType="ReplyDto">
+		SELECT M_SEQ ,M_TITLE ,M_ID ,M_RATE, M_COMMENT ,M_DIRECTOR ,M_PUBDATE ,M_NAVERRATE ,M_MSUBTITLE ,M_ACTORNM ,M_LINK ,M_IMG 
+		FROM M_REPLY
+		WHERE M_ID =#{m_id}
+		ORDER BY M_RATE DESC
+	</select>
+	
 </mapper>
+
+
