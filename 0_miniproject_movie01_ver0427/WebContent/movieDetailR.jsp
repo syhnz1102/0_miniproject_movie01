@@ -182,13 +182,46 @@
 // 			$("body").find($("#rate")).text(rateVal);
 		});//별점등록끝
 		
-		//코멘트입력
+		//코멘트 글자수 제한
+		$("textarea").keyup(function () {
+			var content=$(this).val();
+			$('#counter').html("("+content.length+" / 최대 500자)"); 
+			
+			if(content.length>500){
+				alert("500자 까지만 입력해 주세요.");
+				$(this).val(content.substring(0,500));
+				$("#counter").html("(500/ 최대 500자)");
+			}
+		});
 		
+		//코멘트가 두줄보다 많으면 (43px보다 높이가 커지면) 더보기버튼 보이게 
+		$(".comms").each(function(){
+			if($(this).find($(".realComms")).outerHeight() > 43){
+				$(this).next().show();
+			}
+
+		});
+		
+		//더보기버튼 누르면 보이고 한번 더 누르면 안보이게
+		$(".morebtn").click(function(){
+			if($(this).prev().outerHeight() < 64){
+				$(this).prev().addClass("showmore");
+			}else{
+				$(this).prev().removeClass("showmore");
+			}
+		});
 	});
+		 
 </script>
 <style type="text/css">
  	#replyForm{display:none}
  	#mycomment{display:none}
+ 	.comms{width:585px; height:63px; overflow:hidden; margin: 10px 10px;}
+ 	.morebtn{display:none; float:right}
+ 	.showmore{overflow:visible;height:auto;}
+/*  	#mycomm{width:400px;} */
+/*  	#mycomment td:nth-child(1){width:400px;} */
+/* 	.liner{overflow:hidden;} */
 </style>
 </head>
 <body>
@@ -247,6 +280,7 @@
 				</td>
 				<td>
 					<textarea rows="3" cols="60" name="content" placeholder="자유롭게 코멘트를 입력하세요!" required="required"></textarea>
+					<span id="counter">(0 / 최대 500자)</span>
 				</td>
 			</tr>
 			<tr>
@@ -264,7 +298,7 @@
 <%-- 	<c:forEach var="i" begin="0" end="${list.size()}" step="1"> --%>
 <%-- 		<c:choose> --%>
 <%-- 			<c:when test="${list[i].m_id eq sessionScope.ldto.m_id}"> --%>
-				<table class="table table-striped">
+				<table table table-striped">
 					<col width="100px">
 					<col width="450px">
 					<col width="50px">
@@ -301,23 +335,26 @@
 	<c:forEach var="i" begin="0" end="${list.size()}" step="1">
 		<c:choose>
 			<c:when test="${not empty list[i].m_comment}">
-				<table class="table table-striped">
+				<table class="table table-striped liner">
 					<col width="100px">
 					<col width="600px">
 					<col width="50px">
 					<col width="50px">
-					<col width="150px">
+<!-- 					<col width="150px"> -->
 					<tr>
 						<td>
 							<b>${list[i].m_id}</b>	
 						</td>
 
 						<td>
-							<span>
-								<c:forEach begin="1" end="${list[i].m_rate}" step="1">★</c:forEach><c:forEach begin="1" end="${5-list[i].m_rate}" step="1">☆</c:forEach>
-							&emsp;&emsp;
-							</span>
-							<span>${list[i].m_comment}</span>
+							<div class="comms">
+								<div>
+									<c:forEach begin="1" end="${list[i].m_rate}" step="1">★</c:forEach><c:forEach begin="1" end="${5-list[i].m_rate}" step="1">☆</c:forEach>
+								&emsp;&emsp;
+								</div>
+								<div class="realComms">${list[i].m_comment}</div>
+							</div>
+							<button class="morebtn" type="button">더보기</button>
 						</td>
 					
 						<c:choose>
@@ -340,5 +377,11 @@
 		</c:choose>
 	</c:forEach>
 </div>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 </body>
 </html>

@@ -15,10 +15,10 @@
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-	function movieListR() {
-		var movieNm = document.getElementsByName("movieNm")[0].value;
-		location.href="NaverMController.do?command=movieListR&movieNm="+movieNm;
-	}
+// 	function movieListR() {
+// 		var movieNm = document.getElementsByName("movieNm")[0].value;
+// 		location.href="NaverMController.do?command=movieListR&movieNm="+movieNm;
+// 	}
 	////////검색어 기능 json
 	$(function(){
 	//		var mN="";//뒤로가기버튼에 쓰일 input값 저장
@@ -115,11 +115,12 @@
 	</c:otherwise>
 </c:choose>
 <!-- 검색어기능 -->
-<form name="search" method="post">
-	<input type="hidden" name="command" value="searchMovie">
-	<input type="text" name="movieNm"/>
-	<button type="button" onclick='movieListR()'>영화검색</button>
-</form>
 
+<form name="search" action="NaverMController.do" method="post">
+	<input type="hidden" name="command" value="movieListR">
+	<input type="text" name="movieNm"/>
+	<input type="submit" onclick='movieListR()' value="영화검색">
+</form>
+<input type="image" src="img/grade_img.png"/>
 </body>
 </html>
