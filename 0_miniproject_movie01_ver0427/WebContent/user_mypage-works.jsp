@@ -9,21 +9,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-.img{margin: 0px 50px;}
-.posterbox{height:170px;width:120px;}
-.titlebox{height:30px;width:120px;}
-.num{height:30px;position: relative;}
-.title{display:inline-block; width:180px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
- .title:hover{cursor: pointer;width:140px; display: inline; white-space:normal;} 
-.a{width:1290px;display: inline-block;overflow: hidden;}
-.moremovie{position:absolute; top:25px; right: 0px}
-.movieRate{position:relative; width:150px;}
+.moviebox{height:170px;width:120px;}
+.num{height:30px;}
+/* table{width:1142px; overflow: hidden;display:inline-block;} */
+.a{width:1142px; overflow: hidden;display:inline-block;}
 </style>
 </head>
 <body>
 <h2><span style="color:blue">${sessionScope.ldto.m_name} </span>님의 관람 영화 리스트</h2>
-<a href="user_main.jsp">메인으로</a>
-<table>
+<table border="1">
 		<c:choose>
 			<%--만약 list안에 값이 없다면 --%>
 			<c:when test="${empty list}">	
@@ -42,8 +36,7 @@
 					<tr>
 						<td class="num">
 			<%-- 				<div>${i}점 준 영화</div> --%>
-							<div class="movieRate"><h2>${(status.end+1)-i}점 준 영화</h2></div>
-							<div class="moremovie"><a href="">더보기</a></div>
+							<div>${(status.end+1)-i}점 준 영화</div>
 						</td>
 					</tr>
 					
@@ -51,31 +44,31 @@
 					<tr class="a">
 						<td>
 							<table>
-								
 								<tr>
 								<c:forEach items="${list}" var="dto" varStatus="loopstatus">
 									<c:choose>
 										<c:when test="${dto.m_rate eq (status.end+1)-i}"> <%--만약 해당 리스트 의 rate값이 1이면 표시하라 --%>
-											<td class="posterbox">
-												<div class="imgbox">
-													<img class="img" src="${dto.m_img}">
-													<c:if test='${dto.m_img eq null}'>
-														<img class="img" src="img/noimg.png" style="width:110px">
-													</c:if>
+											<td class="moviebox">
+												<div class="movie">
+													<div class="imgbox">
+														<img class="img" src="${dto.m_img}">
+														<c:if test='${dto.m_img eq null}'>
+															<img class="img" src="img/noimg.png" style="width:110px">
+														</c:if>
+													</div>
 												</div>
 											</td>
 										</c:when>
 									</c:choose>
 								</c:forEach> <!-- n점 대의 값들을 뿌리라! 끝 -->
 								</tr>
-								
 								<tr>
 								<c:forEach items="${list}" var="dto" varStatus="loopstatus">
 									<c:choose>
 										<c:when test="${dto.m_rate eq (status.end+1)-i}"> <%--만약 해당 리스트 의 rate값이 1이면 표시하라 --%>
-											<td class="titlebox">
-												<div>
-													<span class="title">${dto.m_title}</span> 
+											<td class="moviebox">
+												<div class="movie">
+													<span id="title">${dto.m_title}</span> 
 		<%-- 											${dto.m_rate}점 --%>	
 												</div>
 											</td>
@@ -83,9 +76,8 @@
 									</c:choose>
 								</c:forEach> <!-- n점 대의 값들을 뿌리라! 끝 -->
 								</tr>
-								
 							</table>
-						</td>
+						<td>
 					</tr>
 				</c:forEach><%-- 5개 점수별for문 끝 --%>
 			</c:otherwise><%--만약 list안에 값이 없다면 끝--%>

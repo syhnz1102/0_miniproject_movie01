@@ -108,7 +108,8 @@
 		<h1>회원메인</h1>
 		<div>
 			<a href="MReplyController.do?command=myPage&id=${sessionScope.ldto.m_id}" id="idVal">${sessionScope.ldto.m_id}</a>
-			(${sessionScope.ldto.m_role eq 'USER'?'일반회원':'관리자?-오류 '})
+			등급:${sessionScope.ldto.m_role eq 'USER'?'일반회원':'관리자?-오류 '}
+			<a href="MReplyController.do?command=myPage&id=${sessionScope.ldto.m_id}" id="idVal">나의 영화</a>
 			<a href="MUserController.do?command=userinfo&id=${sessionScope.ldto.m_id}">나의 정보</a>
 			<a href="MUserController.do?command=logout">로그아웃</a>
 		</div>

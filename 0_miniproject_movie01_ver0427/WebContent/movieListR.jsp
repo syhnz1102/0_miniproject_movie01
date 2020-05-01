@@ -15,6 +15,9 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	
+	
+	
+	
 	$(function(){
 		var movieNm = $("h1 > b").text();
 		$("input[name=movieNm]").val(movieNm);
@@ -31,6 +34,39 @@
 			var mrate=$(this).parent().siblings("div").eq(2).find("div").eq(0).find("span").text();
 			var msubtitle=$(this).parent().siblings("div").eq(2).find("div").eq(1).text();
 			var mactor=$(this).parent().siblings("div").eq(2).find("div").eq(2).find("span").text();
+			var mlink=$(this).parent().siblings("div").eq(2).find("div").eq(3).find("a").attr("href");
+			
+			var detailInput= $("#det").find("input");
+// 			$("#det").find("input[name=mtitle]").val(mtitle);
+			detailInput.eq(1).val(mtitle);
+			detailInput.eq(2).val(mid);
+			detailInput.eq(3).val(mdirector);
+			detailInput.eq(4).val(mpubdate);
+			detailInput.eq(5).val(mrate);
+			detailInput.eq(6).val(msubtitle);
+			detailInput.eq(7).val(mactor);
+			detailInput.eq(8).val(mlink);
+			detailInput.eq(9).val(mimg);
+			detailInput.eq(10).val(movieNm);
+			
+			$("#det").submit();
+		});
+		
+		
+		//이미지눌렀을때 용 (연습)
+		$("body").on("click",".mimg",function toDetail() {
+			var mimg=		$(this).attr("src");
+			var mtitle=		$(this).parent().find(".mtitle").text();
+			
+			var mid=		$("#idVal").text();
+			var mdirector=	$(this).parent().find(".mdirector span").text();
+			var mpubdate=	$(this).parent().find(".mpubdate span").text();
+			var mrate=		$(this).parent().find(".mrate span").text();
+			var msubtitle=	$(this).parent().find(".msubtitle").text();
+			var mactor=		$(this).parent().find(".mactor span").text();
+			var mlink=		$(this).parent().find(".link >a").attr("href");
+			alert(mlink);
+// 			var mdirector=$(this).parent().next().find("span").text();
 			var mlink=$(this).parent().siblings("div").eq(2).find("div").eq(3).find("a").attr("href");
 			
 			var detailInput= $("#det").find("input");

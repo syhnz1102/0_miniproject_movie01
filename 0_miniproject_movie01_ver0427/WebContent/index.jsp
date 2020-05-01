@@ -1,3 +1,4 @@
+<%@include file="iflogin.jsp"%>
 <%@include file="header_searchBar.jsp"%>
 <%@include file="test02_star.jsp"%>
 <%@page import="java.util.HashMap"%>
@@ -17,6 +18,7 @@
 <script type="text/javascript">
 </script>
 <body>
+
 <h1>${msg}</h1>
 
 <div id ="result">

@@ -1,3 +1,4 @@
+<%@include file="iflogin.jsp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%request.setCharacterEncoding("utf-8"); %>
 <%response.setContentType("text/html; charset=utf-8"); %>
@@ -8,6 +9,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
 <h1>로그인폼</h1>
 <form action="MUserController.do">
 <input type="hidden" name="command" value="login">
