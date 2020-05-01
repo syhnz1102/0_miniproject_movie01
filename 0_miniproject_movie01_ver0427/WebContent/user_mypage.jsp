@@ -51,7 +51,7 @@
 					</c:choose>
 				</c:forEach> <!-- n점 대의 값들을 뿌리라! 끝 -->
 			</c:otherwise>
-		</c:choose>
+		</c:choose><%--만약 list안에 값이 없다면 끝--%>
 		</tr>
 	</c:forEach><%-- 5개 점수별for문 끝 --%>
 
