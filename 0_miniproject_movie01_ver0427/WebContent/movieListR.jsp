@@ -81,7 +81,7 @@
 			detailInput.eq(8).val(mlink);
 			detailInput.eq(9).val(mimg);
 			detailInput.eq(10).val(movieNm);
-			
+			 
 			$("#det").submit();
 		});
 	});
