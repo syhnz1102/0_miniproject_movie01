@@ -70,29 +70,26 @@
 </script>
 <style type="text/css">
 
-/* div{border:1px solid grey} */
+/*  div{border:1px solid lightgrey} */
 
-.movieListBox{border: 1px solid green;}
-.movieBox{border: 1px solid green;}
+/* .movieListBox{border: 1px solid green;} */
+/* .movieBox{border: 1px solid green;} */
 /* .titlebox{border: 1px solid blue;} */
 /* .posterbox{border: 1px solid red;} */
 
 .rateHeader{height:74px;width:100%;position: relative;}
-/* .rateHeader{height:74px;width:1400px;position: relative;} */
 	.movieRate{position:relative; width:200px;}
 	.moremovie{position:absolute; top:25px; right: 0px}
-
- .carousel{width:100%; text-align: center;} /* 이렇게하면 반응형이 되어서 처리를 할게 많아짐 */
-/* .carousel{width:1900px; text-align: center;} */
+.item{height:300px;}
+ .carousel{width:100%;text-align: center;} 
 	.movieListBox{width:100%; height:300px; display: inline-block;overflow: hidden;}
-		.movieBox{width:210px;height:300px;float:left; position:relative;}
-		.movieBox:hover{cursor: pointer;}
-			.posterbox{width:110px;height:auto;position: absolute; top:40px;}
-				.img{margin: 0px 50px;}
-			.titlebox{width:120px;height:auto;position: absolute; top: 220px;}
-				.title{font-size:20px ;display:inline-block; width:180px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
-	 			.title:hover{cursor: pointer;white-space:normal;} 
-/* 	 			.title:hover{cursor: pointer;width:140px; display: inline; white-space:normal;}  */
+		.movieBox{width:166px;height:300px;float:left; position:relative;}
+		.movieBox:hover{cursor: pointer;background-color: grey;color: white;}
+			.posterbox{width:110px;height:auto;position: absolute; top:40px; margin:0 28px;}
+/*  				.img{margin: 0px 30px;}  */
+			.titlebox{text-align:center; width:auto;height:auto;position: absolute; top:220px; left:0px; text-align: center;}
+				.title{font-size:20px ;display:inline-block; width:160px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+	 			.movieBox:hover > .titlebox >.title{cursor: pointer;white-space:normal;width:160px;} 
 
 .carousel-control {background-color: grey; width:50px;}
 
