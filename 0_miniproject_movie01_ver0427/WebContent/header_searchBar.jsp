@@ -44,17 +44,17 @@
 					$("#detailInfo").text("");
 					
 					$("#resultBox").append("<a href='user_main.jsp'> 뒤로</a>");
-					var searchInfo = $("<div>업데이트 날짜 : "+data.lastBuildDate+"</div><div>검색결과 : "+data.total+" 개 </div>");
+					var searchInfo = $("<div id='searchInfo'><div>업데이트 날짜 : "+data.lastBuildDate.substring(0,25)+"</div><div>검색결과 : "+data.total+" 개 </div></div>");
 					$("#resultBox").append(searchInfo);
 					for (var i = 0; i < data.items.length; i++) {
 						var image	 = $("<image class='mimg' src='"+data.items[i].image+"'/></div>");
 		//						영화제목 클릭시 해당영화의 정보를 ajax로 내보냄
 		//						일단은 새로운 db에 출력하는게 아닌 그냥 아무 jsp form에 값을 전달. 
-						var title		 = $("<div><span class='mtitle'>"+data.items[i].title+"</span></div>");
+						var title		 = $("<div class='mtitleBox'><span class='mtitle'>"+data.items[i].title+"</span></div>");
 						var director	 = $("<div class='mdirector' >감독 : <span>"+data.items[i].director.replace('|','').replace('|','')+"</span></div>");
-						var pubDate		 = $("<div class='mpubdate'>제작연도 : <span>"+data.items[i].pubDate+"</span></div>");
+						var pubDate		 = $("<div class='mpubdate'><span>"+data.items[i].pubDate+"</span></div>");
 						
-						var resultInfo	 = $("<div class='result'></div>");
+						var resultInfo	 = $("<div class='result' title='"+data.items[i].title.replace("<b>","").replace("</b>","")+"'></div>");
 						var detailInfo	 = $("<div class='detailInfo'></div>");
 						
 						$("#resultBox").append(resultInfo);
@@ -65,7 +65,6 @@
 						.append(title)
 						.append(director)
 						.append(pubDate)
-						.append("<hr>")
 						.append(detailInfo);
 						
 						var userRating	 = $("<div class='mrate'>네이버평점 : <span>"+data.items[i].userRating+"</span></div>");

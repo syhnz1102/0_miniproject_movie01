@@ -8,10 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-
-.mtitle:hover{cursor:pointer;}
-</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	
@@ -19,8 +15,19 @@
 	
 	
 	$(function(){
+		
+// 		alert($(".mimg").eq(0).attr("src"));
+// 		alert($(".mimg").length);
+		
 		var movieNm = $("h1 > b").text();
 		$("input[name=movieNm]").val(movieNm);
+		
+		var mimg=$(this).find(".mimg").attr("src");
+
+// 		$("body").find($(".mimg")).forEach(function() {
+// 			alert($(".mimg").eq(i).attr("src"));
+// 		});
+		
 		
 		$("body").on("click",".mtitle",function toDetail() {
 			var mimg=$(this).parent().prev().attr("src");
@@ -86,6 +93,9 @@
 		//div눌렀을 때 용 (연습)
 		$("body").on("click",".result",function toDetail() {
 			var mimg=		$(this).find(".mimg").attr("src");
+			if(mimg==""){
+				alert("dd");
+			}
 			var mtitle=		$(this).find(".mtitle").text();
 			
 			var mid=		$("#idVal").text();
@@ -117,8 +127,26 @@
 	
 </script>
 <style type="text/css">
+/* div{border:1px solid grey}  */
+/* #resultBox{border:1px solid red;} */
+#resultBox{margin:0 auto;width:94%; overflow: auto;}
+#searchInfo{overflow:visible;height:50px;line-height: 50px;}
+#searchInfo > div:first-child{width:330px;float:right}
+
 .detailInfo{display:none}
-.result:hover{cursor: pointer}
+/* .result{text-align:center;width:280px;height:250px;float:left;margin-bottom: 50px;position: relative;} */
+/* .result{text-align:center;width:160px;height:250px;float:left;margin-bottom: 50px;position: relative;} */
+/* .mtitleBox{ width:250px;left:15px;bottom:20px;position: absolute;display: inline-block;} */
+/* .mpubdate{width:140px;left:68px;bottom:0px;position: absolute;display: inline-block;} */
+
+/* .mtitle:hover{cursor:pointer;} */
+
+.result{padding:10px;text-align:center;width:154.2px;height:300px;float:left; position:relative;margin-bottom: 50px;}
+		.mtitleBox{width:160px;height:auto;position: absolute; text-align: center; bottom:27px;left:6px;}
+		.result:hover{cursor: pointer;background-color: grey;color: white;}
+			.mtitle{font-size:20px ;display:inline-block; width:160px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
+ 			.result:hover > .mtitleBox >.mtitle{cursor: pointer;white-space:normal;width:160px;} 
+			.mpubdate{position:absolute;bottom:0px;left:6px; font-size:20px ;display:inline-block; width:160px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -127,10 +155,12 @@
 		<h2><b>검색어를 입력하세요-!</b></h2>
 	</c:when>
 	<c:otherwise>
-		<h1>"<b>${movieNm}</b>" 검색결과</b></h1>
+		<h1>"<b>${movieNm}</b>" 검색결과</h1>
 	</c:otherwise>
 </c:choose>
-<div id ="resultBox">
+<div>
+	<div id ="resultBox">
+	</div>
 </div>
 <div>
 <form id="det" action="NaverMController.do" method="post">
@@ -146,6 +176,7 @@
 	<input type="hidden" name="mimg">
 	<input type="hidden" name="mkeyword">
 </form>
+
 </div>
 </body>
 </html>
