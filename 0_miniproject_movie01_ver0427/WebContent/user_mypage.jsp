@@ -32,16 +32,18 @@
 				$(car).carousel('prev');	
 			});
 			
-			if($(car).find(".movieBox").length<6){
-				$(car).find(".item").eq(1).remove();
-				$(car).find(".item").eq(2).remove();
-// 				$(car).find(".right").remove();
-// 				$(car).find(".left").remove();
-				$(car).find(".right").removeAttr("data-slide");
-				$(car).find(".left").removeAttr("data-slide");
+// 			if($(car).find(".movieBox").length<6){
+// 				$(car).find(".right").removeAttr("data-slide");
+// 				$(car).find(".left").removeAttr("data-slide");
+// 			}
+			
+			//캐러셀 첫번째 슬라이드만 있을 때
+			if($(car).find(".movieBox").length<9){
+				$(car).find(".item").eq(0).siblings(".item").remove();
 			}
-			if($(car).find(".movieBox").length<10){
-				$(car).find(".item").eq(2).remove();
+			//캐러셀 두번째 슬라이드까지 있을 때
+			if($(car).find(".movieBox").length<18){
+				$(car).find(".item").eq(0).siblings(".item:last-child").remove();
 			}
 			
 		})
@@ -70,7 +72,8 @@
 
 /* div{border:1px solid grey} */
 
-/* .movieBox{border: 1px solid green;} */
+.movieListBox{border: 1px solid green;}
+.movieBox{border: 1px solid green;}
 /* .titlebox{border: 1px solid blue;} */
 /* .posterbox{border: 1px solid red;} */
 
@@ -79,10 +82,10 @@
 	.movieRate{position:relative; width:200px;}
 	.moremovie{position:absolute; top:25px; right: 0px}
 
-/* .carousel{width:100%; text-align: center;} *//* 이렇게하면 반응형이 되어서 처리를 할게 많아짐 */
-.carousel{width:1900px; text-align: center;}
-	.movieListBox{width:80%; height:300px; display: inline-block;overflow: hidden;}
-		.movieBox{width:210px;height:auto;float:left; position:relative;}
+ .carousel{width:100%; text-align: center;} /* 이렇게하면 반응형이 되어서 처리를 할게 많아짐 */
+/* .carousel{width:1900px; text-align: center;} */
+	.movieListBox{width:100%; height:300px; display: inline-block;overflow: hidden;}
+		.movieBox{width:210px;height:300px;float:left; position:relative;}
 		.movieBox:hover{cursor: pointer;}
 			.posterbox{width:110px;height:auto;position: absolute; top:40px;}
 				.img{margin: 0px 50px;}
@@ -90,6 +93,8 @@
 				.title{font-size:20px ;display:inline-block; width:180px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
 	 			.title:hover{cursor: pointer;white-space:normal;} 
 /* 	 			.title:hover{cursor: pointer;width:140px; display: inline; white-space:normal;}  */
+
+.carousel-control {background-color: grey; width:50px;}
 
 /* .a{width:1290px;display: inline-block;overflow: hidden;} */
 
@@ -132,8 +137,8 @@
 									<c:when test="${dto.m_rate eq (status.end+1)-i}"> <%--만약 해당 리스트 의 rate값이 1이면 표시하라 --%>
 											
 											<c:set var="count" value="${count + 1}" />
-											<c:if test="${count<8}">
-												<div style="border:1px solid white"  class="movieBox">
+											<c:if test="${count<10}">
+												<div class="movieBox">
 													<div class="posterbox">
 														<img class="img" src="${dto.m_img}">
 														<c:if test='${dto.m_img eq null}'>
@@ -164,7 +169,7 @@
 									<c:when test="${dto.m_rate eq (status.end+1)-i}"> <%--만약 해당 리스트 의 rate값이 1이면 표시하라 --%>
 										
 										<c:set var="count" value="${count + 1}" />
-										<c:if test="${count>7 && count<14}">
+										<c:if test="${count>9 && count<19}">
 											<div class="movieBox">
 												<div class="posterbox">
 													<img class="img" src="${dto.m_img}">
@@ -196,7 +201,7 @@
 									<c:when test="${dto.m_rate eq (status.end+1)-i}"> <%--만약 해당 리스트 의 rate값이 1이면 표시하라 --%>
 										
 										<c:set var="count" value="${count + 1}" />
-										<c:if test="${count>13 && count<20}">
+										<c:if test="${count>18 && count<28}">
 											<div class="movieBox">
 												<div class="posterbox">
 													<img class="img" src="${dto.m_img}">

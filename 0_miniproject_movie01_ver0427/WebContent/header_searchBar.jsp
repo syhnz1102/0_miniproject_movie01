@@ -122,6 +122,6 @@
 	<input type="text" name="movieNm"/>
 	<input type="submit" onclick='movieListR()' value="영화검색">
 </form>
-<input type="image" src="img/grade_img.png"/>
+<!-- <input type="image" src="img/grade_img.png"/> -->
 </body>
 </html>
