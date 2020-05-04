@@ -264,7 +264,7 @@
 <%-- 	<div>네이버평점 : <span id="mnaverrate">${arr[4]}</span></div> --%>
 	<div>감독 : <span id="mdirector">${arr[2]}</span></div>
 	<div>출연진 : <span id="mactor">${arr[6]}</span></div>
-	<div><a id="mlink" href="${arr[7]}">네이버링크 바로가기</a></div>
+	<div><a id="mlink" href="${arr[7]}">네이버링크 바로가기@</a></div>
 <%-- 	<div>${arr[8]}</div> --%>
 	
 	<div id='replyForm'>

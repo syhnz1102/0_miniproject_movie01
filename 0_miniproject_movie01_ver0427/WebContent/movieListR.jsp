@@ -64,10 +64,38 @@
 			var mrate=		$(this).parent().find(".mrate span").text();
 			var msubtitle=	$(this).parent().find(".msubtitle").text();
 			var mactor=		$(this).parent().find(".mactor span").text();
-			var mlink=		$(this).parent().find(".link >a").attr("href");
-			alert(mlink);
-// 			var mdirector=$(this).parent().next().find("span").text();
-			var mlink=$(this).parent().siblings("div").eq(2).find("div").eq(3).find("a").attr("href");
+// 			var mlink=		$(this).parent().find(".link >a").attr("href");
+			var mlink=		$(this).parent().find(".mlink >a").attr("href");
+			
+			var detailInput= $("#det").find("input");
+// 			$("#det").find("input[name=mtitle]").val(mtitle);
+			detailInput.eq(1).val(mtitle);
+			detailInput.eq(2).val(mid);
+			detailInput.eq(3).val(mdirector);
+			detailInput.eq(4).val(mpubdate);
+			detailInput.eq(5).val(mrate);
+			detailInput.eq(6).val(msubtitle);
+			detailInput.eq(7).val(mactor);
+			detailInput.eq(8).val(mlink);
+			detailInput.eq(9).val(mimg);
+			detailInput.eq(10).val(movieNm);
+			
+			$("#det").submit();
+		});
+		
+		//div눌렀을 때 용 (연습)
+		$("body").on("click",".result",function toDetail() {
+			var mimg=		$(this).find(".mimg").attr("src");
+			var mtitle=		$(this).find(".mtitle").text();
+			
+			var mid=		$("#idVal").text();
+			var mdirector=	$(this).find(".mdirector span").text();
+			var mpubdate=	$(this).find(".mpubdate span").text();
+			var mrate=		$(this).find(".mrate span").text();
+			var msubtitle=	$(this).find(".msubtitle").text();
+			var mactor=		$(this).find(".mactor span").text();
+// 			var mlink=		$(this).find(".link >a").attr("href");
+			var mlink=		$(this).find(".mlink >a").attr("href");
 			
 			var detailInput= $("#det").find("input");
 // 			$("#det").find("input[name=mtitle]").val(mtitle);
@@ -90,6 +118,7 @@
 </script>
 <style type="text/css">
 .detailInfo{display:none}
+.result:hover{cursor: pointer}
 </style>
 </head>
 <body>

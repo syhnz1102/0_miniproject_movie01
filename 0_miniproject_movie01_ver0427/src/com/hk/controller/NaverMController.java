@@ -185,7 +185,7 @@ public class NaverMController extends HttpServlet {
 			String mlink=request.getParameter("mlink");
 			String mimg=request.getParameter("mimg");
 			String mkeyword=request.getParameter("mkeyword");
-			
+			System.out.println("아니!!!!!!!!"+mlink);
 			String [] arr= {mtitle, mid, mdirector, mpubdate, mrate, msubtitle, mactor, mlink, mimg};
 			
 			ReplyDao dao =new ReplyDao();
