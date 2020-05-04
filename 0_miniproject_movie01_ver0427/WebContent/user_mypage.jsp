@@ -135,7 +135,7 @@
 											
 											<c:set var="count" value="${count + 1}" />
 											<c:if test="${count<10}">
-												<div class="movieBox">
+												<div class="movieBox" title="${dto.m_title}">
 													<div class="posterbox">
 														<img class="img" src="${dto.m_img}">
 														<c:if test='${dto.m_img eq null}'>
@@ -167,7 +167,7 @@
 										
 										<c:set var="count" value="${count + 1}" />
 										<c:if test="${count>9 && count<19}">
-											<div class="movieBox">
+											<div class="movieBox" title="${dto.m_title}">
 												<div class="posterbox">
 													<img class="img" src="${dto.m_img}">
 													<c:if test='${dto.m_img eq null}'>
@@ -199,7 +199,7 @@
 										
 										<c:set var="count" value="${count + 1}" />
 										<c:if test="${count>18 && count<28}">
-											<div class="movieBox">
+											<div class="movieBox" title="${dto.m_title}">
 												<div class="posterbox">
 													<img class="img" src="${dto.m_img}">
 													<c:if test='${dto.m_img eq null}'>
