@@ -23,7 +23,6 @@ public class MReplyController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("하이잉");
 		String command=request.getParameter("command");
 		ReplyDao dao = new ReplyDao();
 		if(command.equals("addRate")) {
@@ -75,7 +74,6 @@ public class MReplyController extends HttpServlet {
 			//받아와야할 값
 			//seq은 자동생성되니 필요없고
 			//id, title, content, rate,
-			System.out.println("ㅎㅇ");
 			String mid=request.getParameter("id");
 			String mtitle=request.getParameter("title");
 			String mdirector=request.getParameter("director");
@@ -129,7 +127,6 @@ public class MReplyController extends HttpServlet {
 			List<ReplyDto> list= dao.getMyMovie(id);
 			request.setAttribute("list", list);
 			System.out.println(list);
-			System.out.println("mypage갑시동");
 			dispatch("user_mypage.jsp", request, response); 
 		}
 	}

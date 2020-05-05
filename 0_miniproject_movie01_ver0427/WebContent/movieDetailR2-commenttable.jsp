@@ -27,63 +27,10 @@
 // 				alert("댓글등록성공");
 				$("#replyForm").css("display","none");
 				$("#commbutton").css("display","none");
-// 				$("#mycomment").css("display","block");
+				$("#mycomment").css("display","block");
 				
- 				//얘를
-				var textNew = $("#com").find("textarea").val();
-				//이안에 넣고
-				$(".commsBox .comms").find($(".realComms")).text(textNew);
-				//보여주기
-				$(".commsBox").show();
- 				
-				$("#mycomment").show();
 				//컨트롤러에서 id, comm도 가져오기? ㄴㄴ 방금쓴걸 넣어주기
 				
-				$("#myid").text($("#idVal").text());
-				$("#mycomm").text(textNew);
-				
-				//commbutton코멘트버튼 숨기고
-				//replyForm숨기고
-				//mycomment보이고
-				
-				//그리고 깜박한게 몇번째까지 보여줄지를 정하는거 그거 없애고 table반복생성구간 바꿔서 아예 테이블 자체에 적용
-				
-			},error:function(request,error){
-				alert("서버통신실패!!"+request.status+","+error);
-			}
-			
-		}); 
-		
-	}
-	
-	//댓글수정
-	function gg2() {
-// 		$("#com").submit();
-		
- 		var comdata=$("#comUdt").serialize();//form안의 값을 시리얼라이즈
-// 		var $("com").
- 		$.ajax({
-			url:"MReplyController.do",
-			method:"post",
-			datatype:"text",
-			async:false,
-			data:comdata,
-			success:function(data) {
-// 				alert("댓글이 수정되었습니다.");
-				$("#replyFormUdt").css("display","none");
-// 				$("#commbutton").css("display","none");
-// 				$("#mycomment").css("display","block");//얘가 (구버전)
-				//컨트롤러에서 id, comm도 가져오기? ㄴㄴ 방금쓴걸 넣어주기
-				
-				$("#replyFormUdt").hide();
-
-				//얘를
-				var textUdt = $("#comUdt").find("textarea").val();
-				//이안에 넣고
-				$(".commsBoxUdt .comms").find($(".realComms")).text(textUdt);
-				//보여주기
-				$(".commsBoxUdt").show();
-						
 				$("#myid").text($("#idVal").text());
 				$("#mycomm").text($("textarea").val());
 				for (var i = 1; i < 6; i++) {
@@ -241,12 +188,12 @@
 		//코멘트 글자수 제한
 		$("textarea").keyup(function () {
 			var content=$(this).val();
-			$('.counter').html("("+content.length+" / 최대 500자)"); 
+			$('#counter').html("("+content.length+" / 최대 500자)"); 
 			
 			if(content.length>500){
 				alert("500자 까지만 입력해 주세요.");
 				$(this).val(content.substring(0,500));
-				$(".counter").html("(500/ 최대 500자)");
+				$("#counter").html("(500/ 최대 500자)");
 			}
 		});
 		
@@ -266,47 +213,18 @@
 				$(this).prev().removeClass("showmore");
 			}
 		});
-		
-		//수정버튼을 누르면 변수안에 방금것들 넣고
-		//내 코멘트를 안보이게하고
-		//코멘트 입력폼을 부른다.(복붙해버리자그냥.)
-	
-		//수정버튼을 누르면 폼을 부른다.
-		$("#commUpdate").click(function() {
-			$("#replyFormUdt").show();
-			$(".commsBoxUdt").hide();
-		});
-		
-		
-		
-		
-		//코멘트를 등록하는건 새로입력하는것과 똑같은방식으로 진행된다.(placeholder만 변수에 넣은값넣어주기)
 	});
 		 
 </script>
 <style type="text/css">
-/* 	div{border:1px solid grey;} */
-
-/* 	얘는 수정용 */
- 	#replyFormUdt{display:none}
-
-/* 	얘는 등록용 */
  	#replyForm{display:none}
  	#mycomment{display:none}
- 	.comms{width:600px; height:63px; overflow:hidden; margin: 10px 10px;display:inline-block;}
- 	.showmore{overflow:visible;height:auto;display:inline-block;}
+ 	.comms{width:585px; height:63px; overflow:hidden; margin: 10px 10px;}
+ 	.morebtn{display:none; float:right}
+ 	.showmore{overflow:visible;height:auto;}
 /*  	#mycomm{width:400px;} */
 /*  	#mycomment td:nth-child(1){width:400px;} */
 /* 	.liner{overflow:hidden;} */
-	.commsBoxUdt{width:950px;margin-bottom: 30px;border: 1px solid grey;}
-	.commsBox{width:950px;margin-bottom: 30px;border: 1px solid grey;}
-	.ids{margin:10px; width:120px;float:left;display:inline-block;}
-	.smallStars{width:120px;}
-	.commUpdateBox{overflow: auto; width:50px;float: right;}
-	.commDelBox{overflow: auto; width:50px;float: right;}
-	
- 	.morebtn{display:none;float: right;width:60px}
- 	
 </style>
 </head>
 <body>
@@ -341,7 +259,7 @@
 		</span>
 	</span>
 	<div id='starResult'></div>
-
+	<div id='commbutton'></div>
 	
 
 	
@@ -350,10 +268,39 @@
 	<div>감독 : <span id="mdirector">${arr[2]}</span></div>
 	<div>출연진 : <span id="mactor">${arr[6]}</span></div>
 	<div><a id="mlink" href="${arr[7]}">네이버링크 바로가기@</a></div>
+<%-- 	<div>${arr[8]}</div> --%>
+	
+	<div id='replyForm'>
+		<form id="com" action="MReplyController.do" method="post">
+		<input type="hidden" name="command" value="addComment">
+		<input type="hidden" name="id" value="${sessionScope.ldto.m_id}">
+		<input type="hidden" name="director" value="${arr[2]}">
+		<input type="hidden" name="title" value="${arr[0]}">
+			<table class="table table-striped">
+			<tr>
+				<td>
+					<b>${sessionScope.ldto.m_id}</b>님의 코멘트 :
+				</td>
+				<td>
+					<textarea rows="3" cols="60" name="content" placeholder="자유롭게 코멘트를 입력하세요!" required="required"></textarea>
+					<span id="counter">(0 / 최대 500자)</span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" class="btn btn-success" value="글등록" onclick="gg()">
+				</td>
+			</tr>
+			</table>
+		</form>
+	</div>
 </div>
 
 <%-- <c:forEach var="i" begin="0" end="${list.size()-1}" step="1"> --%>
-<%-- <div id="mycommentddddd">
+<div id="mycomment">
+<%-- 	<c:forEach var="i" begin="0" end="${list.size()}" step="1"> --%>
+<%-- 		<c:choose> --%>
+<%-- 			<c:when test="${list[i].m_id eq sessionScope.ldto.m_id}"> --%>
 				<table table table-striped">
 					<col width="100px">
 					<col width="450px">
@@ -365,7 +312,7 @@
 						</td>
 						<td>
 <!-- 							<span id="myrate"> -->
-								<c:forEach begin="1" end="1" step="1">★</c:forEach><c:forEach begin="1" end="1" step="1">☆</c:forEach>
+<%-- 								<c:forEach begin="1" end="1" step="1">★</c:forEach><c:forEach begin="1" end="1" step="1">☆</c:forEach> --%>
 <!-- 							&emsp;&emsp; -->
 <!-- 							</span> -->
 							<span id="mycomm"></span>
@@ -381,166 +328,54 @@
 							</c:when>
 						</c:choose>
 					</tr>
-				</table> --%>
+				</table>
 <%-- 			</c:when> --%>
 <%-- 		</c:choose> --%>
 <%-- 	</c:forEach> --%>
 </div> 
 
-
-
-
-<br>
-<br>
-<h2>마이코멘트</h2>
-<div id="mycomment">	
-	<div class="commsBoxUdt">
-		<div class="ids">
-			<b>${sessionScope.ldto.m_id}</b>	
-		</div>
-		<div class="comms">
-			<div class="smallStars">
-			요기
-			&emsp;&emsp;
-			</div>
-			<div id="myComm">요기</div>
-		</div>
-		<button class="morebtn" type="button">더보기</button>
-		<c:choose>
-			<c:when test="${list[i].m_id eq sessionScope.ldto.m_id}">
-				
-				<div class="commDelBox">
-					<button id="commDel">삭제</button>
-				</div>
-				<div class="commUpdateBox">
-					<button id="commUpdate">수정</button>
-				</div>
-			</c:when>
-		</c:choose>
-	</div>
-				
-</div>
-
-<div id="mycomment2">	
-	<c:forEach var="i" begin="0" end="${list.size()}" step="1">
-		<c:choose>
-			<c:when test="${not empty list[i].m_comment}">
-				<c:choose>
-					<c:when test="${list[i].m_id eq sessionScope.ldto.m_id}">
-				
-						<div class="commsBoxUdt">
-							<div class="ids">
-								<b>${list[i].m_id}</b>	
-							</div>
-							<div class="comms">
-								<div class="smallStars">
-									<c:forEach begin="1" end="${list[i].m_rate}" step="1">★</c:forEach><c:forEach begin="1" end="${5-list[i].m_rate}" step="1">☆</c:forEach>
-								&emsp;&emsp;
-								</div>
-								<div class="realComms">${list[i].m_comment}</div>
-							</div>
-							<button class="morebtn" type="button">더보기</button>
-							<c:choose>
-								<c:when test="${list[i].m_id eq sessionScope.ldto.m_id}">
-									
-									<div class="commDelBox">
-										<button id="commDel">삭제</button>
-									</div>
-									<div class="commUpdateBox">
-										<button id="commUpdate">수정</button>
-									</div>
-								</c:when>
-							</c:choose>
-						</div>
-				
-				
-						
-						<div id='replyFormUdt'>
-							<form id="comUdt" action="MReplyController.do" method="post">
-							<input type="hidden" name="command" value="addComment">
-							<input type="hidden" name="id" value="${sessionScope.ldto.m_id}">
-							<input type="hidden" name="director" value="${arr[2]}">
-							<input type="hidden" name="title" value="${arr[0]}">
-								<table class="table table-striped">
-								<tr>
-									<td>
-										<b>${sessionScope.ldto.m_id}</b>님의 코멘트 :
-									</td>
-									<td>
-										<textarea rows="4" cols="100" name="content" required="required">${list[i].m_comment}</textarea>
-										<span class="counter">(0 / 최대 500자)</span>
-									</td>
-								</tr>
-								<tr>
-									<td colspan="2">
-										<input type="button" class="btn btn-success" value="수정완료" onclick="gg2()">
-									</td>
-								</tr>
-								</table>
-							</form>
-						</div>
-
-					</c:when>
-				</c:choose>
-			</c:when>
-		</c:choose>
-	</c:forEach>
-</div>
-<div id='commbutton'></div>	
-<div id='replyForm'>
-	<form id="com" action="MReplyController.do" method="post">
-	<input type="hidden" name="command" value="addComment">
-	<input type="hidden" name="id" value="${sessionScope.ldto.m_id}">
-	<input type="hidden" name="director" value="${arr[2]}">
-	<input type="hidden" name="title" value="${arr[0]}">
-		<table class="table table-striped">
-		<tr>
-			<td>
-				<b>${sessionScope.ldto.m_id}</b>님의 코멘트 :
-			</td>
-			<td>
-				<textarea rows="4" cols="100" name="content" placeholder="자유롭게 코멘트를 입력하세요!" required="required"></textarea>
-				<span class="counter">(0 / 최대 500자)</span>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<input type="button" class="btn btn-success" value="글등록" onclick="gg()">
-			</td>
-		</tr>
-		</table>
-	</form>
-</div>
-<br>
-<br>
-<h2>남의코멘트</h2>
 <div id="comments">	
 	<c:forEach var="i" begin="0" end="${list.size()}" step="1">
 		<c:choose>
 			<c:when test="${not empty list[i].m_comment}">
-				<c:choose>
-					<c:when test="${list[i].m_id eq sessionScope.ldto.m_id}">
-				
-					</c:when>
-					<c:otherwise>
+				<table class="table table-striped liner">
+					<col width="100px">
+					<col width="600px">
+					<col width="50px">
+					<col width="50px">
+<!-- 					<col width="150px"> -->
+					<tr>
+						<td>
+							<b>${list[i].m_id}</b>	
+						</td>
 
-						<div class="commsBox">
-							<div class="ids">
-								<b>${list[i].m_id}</b>	
-							</div>
+						<td>
 							<div class="comms">
-								<div class="smallStars">
+								<div>
 									<c:forEach begin="1" end="${list[i].m_rate}" step="1">★</c:forEach><c:forEach begin="1" end="${5-list[i].m_rate}" step="1">☆</c:forEach>
 								&emsp;&emsp;
 								</div>
 								<div class="realComms">${list[i].m_comment}</div>
 							</div>
 							<button class="morebtn" type="button">더보기</button>
-							
-						</div>
-						
-					</c:otherwise>
-				</c:choose>
+						</td>
+					
+						<c:choose>
+							<c:when test="${list[i].m_id eq sessionScope.ldto.m_id}">
+								<td>
+								<button id="commUpdate">수정</button>
+								</td>
+								<td>
+								<button>삭제</button>
+								</td>
+							</c:when>
+							<c:otherwise>
+							<td></td>
+							<td></td>
+							</c:otherwise>
+						</c:choose>
+					</tr>
+				</table>
 			</c:when>
 		</c:choose>
 	</c:forEach>
