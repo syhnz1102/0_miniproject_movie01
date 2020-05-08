@@ -18,7 +18,7 @@
 <script type="text/javascript">
 </script>
 <body>
-
+ 
 <h1>${msg}</h1>
 
 <div id ="result">
